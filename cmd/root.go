@@ -57,6 +57,7 @@ type RootCommandConfig struct {
 	CfgFile           string
 	Dryrun            bool
 	Verbose           bool
+	ChangeSELLabels   bool
 	CliConfig         *viper.Viper
 	Buildah           bool
 	ProjectConfig     *ProjectConfig
@@ -95,6 +96,7 @@ Complete documentation is available at https://appsody.dev`,
 
 	rootCmd.PersistentFlags().StringVar(&rootConfig.CfgFile, "config", "", "The absolute path to the Appsody config file. Use this option when you want to specify your own, customized config file (default '$HOME/.appsody/.appsody.yaml')")
 	rootCmd.PersistentFlags().BoolVarP(&rootConfig.Verbose, "verbose", "v", false, "Prints more detailed log output, to the console and to a file in $HOME/.appsody/logs")
+	rootCmd.PersistentFlags().BoolVarP(&rootConfig.ChangeSELLabels, "change-selinux-labels", "Z", false, "Changes SELinux labels on mounted directories using \":Z\" suffix for \"-v\" argument.")
 	rootCmd.PersistentFlags().BoolVar(&rootConfig.Dryrun, "dryrun", false, "Shows the commands that are called by this command, without running them.")
 
 	// parse the root flags and init logging before adding all the other commands in case those log messages
